@@ -56,15 +56,19 @@ while True:
         while comment_queue:
             comment = comment_queue.pop(0)
             if 'pyq' in comment.body.lower()  and comment.id not in RESPONDED:
-                TopicChosen = random.choice([ChemistryTopics])
-                ChapterChosen = random.choice(ChemistryTopics)
+                ChapterChosen=random.choice(ChemistryTopics)
+                
 
 
-                i = random.randint(0, len(ChapterChosen)-1)
+
+               
                 if ChapterChosen=='P':
+                    QuestionChosen= random.choice(P_BLOCKQ)
+                    i=P_BLOCKQ.index(QuestionChosen)
                     REPLY = '''Here is a random jee previous year question for ya : 
                 Q)  %s  
                 >!Solution = %s!<   <--- Solution
+
                 Chapter= P block
                 
                  A)  %s
@@ -80,9 +84,12 @@ while True:
                     data = supabase.table("CommentsID").insert({"id": comment.id, "COMMENTBODY": comment.body}).execute()
             
                 elif ChapterChosen=='Period':
+                        QuestionChosen= random.choice(PeriodicitySQ)
+                        i=PeriodicitySQ.index(QuestionChosen)
                         REPLY = '''Here is a random jee previous year question for ya : 
                 Q)  %s   
                  >!Solution = %s!<   <--- Solution
+
                 Chapter= Periodicity
                  
                 A)  %s
@@ -97,9 +104,12 @@ while True:
                         comment.reply(REPLY)
                         data = supabase.table("CommentsID").insert({"id": comment.id, "COMMENTBODY": comment.body}).execute()
                 elif ChapterChosen=='Bonding':
+                    QuestionChosen= random.choice(BondingSQ)
+                    i=BondingSQ.index(QuestionChosen)
                     REPLY = '''Here is a random jee previous year question for ya :  
                 Q)%s   
                 >!Solution = %s!<  <--- Solution
+
                 Chapter= Chemical Bonding
                         
                 A)  %s
@@ -114,6 +124,8 @@ while True:
                     comment.reply(REPLY)
                     data = supabase.table("CommentsID").insert({"id": comment.id, "COMMENTBODY": comment.body}).execute()
                 elif ChapterChosen=='Hydrogen':
+                    QuestionChosen= random.choice(HydrogenSQ)
+                    i=HydrogenSQ.index(QuestionChosen)
                     REPLY = '''Here is a random jee previous year question for ya : 
                 Q)  %s  
                 >!Solution = %s!<  <--- Solution
@@ -132,6 +144,8 @@ while True:
                     comment.reply(REPLY)
                     data = supabase.table("CommentsID").insert({"id": comment.id, "COMMENTBODY": comment.body}).execute()
                 elif ChapterChosen=='S':
+                    QuestionChosen= random.choice(SBLOCKSQ)
+                    i=SBLOCKSQ.index(QuestionChosen)
                     REPLY = '''Here is a random jee previous year question for ya : 
                 Q)  %s   
                  >!Solution = %s!<   <--- Solution
@@ -150,6 +164,8 @@ while True:
                     comment.reply(REPLY)
                     data = supabase.table("CommentsID").insert({"id": comment.id, "COMMENTBODY": comment.body}).execute()
                 elif ChapterChosen=='Metallurgy':
+                    QuestionChosen= random.choice(MetallurgySQ)
+                    i=MetallurgySQ.index(QuestionChosen)
                     REPLY = '''Here is a random jee previous year question for ya : 
                 Q)  %s   
                  >!Solution = %s!<   <--- Solution
@@ -168,6 +184,8 @@ while True:
                     comment.reply(REPLY)
                     data = supabase.table("CommentsID").insert({"id": comment.id, "COMMENTBODY": comment.body}).execute()
                 elif ChapterChosen=='Env':
+                    QuestionChosen= random.choice(EnvSQ)
+                    i=EnvSQ.index(QuestionChosen)
                     REPLY = '''Here is a random jee previous year question for ya : 
                 Q)  %s   
                  >!Solution = %s!<   <--- Solution
@@ -186,6 +204,8 @@ while True:
                     comment.reply(REPLY)
                     data = supabase.table("CommentsID").insert({"id": comment.id, "COMMENTBODY": comment.body}).execute()
                 elif ChapterChosen=='DF':
+                    QuestionChosen= random.choice(DFBLOCKSQ)
+                    i=DFBLOCKSQ.index(QuestionChosen)
                     REPLY = '''Here is a random jee previous year question for ya : 
                 Q)  %s   
                  >!Solution = %s!<   <--- Solution
