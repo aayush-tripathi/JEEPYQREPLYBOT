@@ -1,0 +1,3 @@
+praw
+supabase-py
+flask
