@@ -28,13 +28,7 @@ Subreddit = reddit.subreddit("JEENEETards")
 ChemistryTopics = ['P','Hydrogen','Bonding','Period','S','Metallurgy','Env','DF']
 
 
-#PhysicsTopics = ['BasicMath', 'UD', '1D', '2D', 'NLM', 'WPE', 'COM', 'Rotation''Gravitation', 'Solids', 'Fluids',
-        #         'Thermal'
-    #, 'Thermo', 'KTG', 'Oscillations', 'Waves', 'Electrostats', 'Capacitance', 'CurrentElectricity', 'Magnetism'
-      #                                                                                               
-     #                                   'MagCurrent',
-       #          'EMI', 'AC', 'EMW', 'RAYOP', 'WAVEOP', 'DualNature', 'Atomic', 'Nuclear', 'Semi', 'Comms',
-        #         'ExpPhysics']
+PhysicsTopics = ['Magnetism and Matter']
 
 
 #MathematicsTopics = ['Basic', 'Quad', 'Complex', 'PNC', 'Seq', 'PMI', 'Bino', 'TrigRat', 'TrigId', 'Line', 'Circle'
