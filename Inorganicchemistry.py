@@ -267,19 +267,22 @@ DFBLOCKSQ=['Which one of the following has the lowest enthalpy of hydration ',
 'Which one of the following is the most stable in divalent form',
 'Most Common oxidation state of Lanthanoid elements is +3 . Which deviates from this most easily ',
 'Lowest spin only magnetic moment among the following',
-'Strongest Oxidising Agent ']
+'Strongest Oxidising Agent ',
+' Thermal decomposition of a Mn compound (X) at 513 K results in compound (Y), MnO2 and a gaseous product. MnO2 reacts with NaCl and concentrated H2SO4 to give a pungent gas Z. X, Y and Z, respectively are '
+
+]
 
 DFBLOCKA=['Cr2+','Zn(OH)2','Sc3+ and Zn3+','5','Sm2+ and Er3+','Cu','4','Mn4+ and H2O','Mn2+','Cu(OH)2','Yb',
-'Ce','V2+','Mn3+']
+'Ce','V2+','Mn3+','K3MnO4, K2MnO4 and Cl2']
 
 DFBLOCKB=['Mn2+','ZnO','Ti4+ and Cu2+','1','Yb2+ and Lu3+','Mn','5','Mn2+ and H2O','Mn4+','Cu','Sm',
-'La','Ni2+','Ti3+']
+'La','Ni2+','Ti3+','K2MnO4, KmnO4 and SO2']
 
 DFBLOCKC=['Fe2+','[Zn(OH)4] (2-) ','V2+ and Ti3+','0','Eu2+ and Tb4+','Ni','6','Mn4+ , H2O and O2','Mn3+','Cu2O','Eu',
-'Lu','Cr2+','Fe3+']
+'Lu','Cr2+','Fe3+','KMnO4, K2MnO4 and Cl2']
 
 DFBLOCKD=['Co2+','[ZnO2] (2-)','Zn2+ and Mn2+','3','Tb2+ and Tm4+','Zn','3','Mn2+,H2O and O2','Mn6+','CuH2','Ce',
-'Gd','Fe2+','Cr3+']
+'Gd','Fe2+','Cr3+','K2MnO4, KMnO4 and Cl2']
 
 DFBLOCKSOL=[DFBLOCKB[0],DFBLOCKD[1],DFBLOCKA[2],DFBLOCKD[3],DFBLOCKD[4],DFBLOCKA[5],DFBLOCKC[6],DFBLOCKD[7],DFBLOCKA[8],
-DFBLOCKB[9],DFBLOCKC[10],DFBLOCKA[11],DFBLOCKB[12],DFBLOCKA[13]]
+DFBLOCKB[9],DFBLOCKC[10],DFBLOCKA[11],DFBLOCKB[12],DFBLOCKA[13],DFBLOCKC[14]]
