@@ -14,15 +14,17 @@ def random_shuffle(iterable):
 
 class QuestionParser:
     COMMENT_TEMPLATE = """Here is a random jee previous year question for ya:
-Q) %s
 
->!Solution = %s!<   <--- Solution
-Chapter = %s
+Q) {question}
 
- - A)  %s
- - B)  %s
- - C)  %s
- - D)  %s"""
+>!Solution = {solution}!<   <--- Solution
+
+Chapter = `{chapter_name}`
+
+ - A)  {options[0]}
+ - B)  {options[1]}
+ - C)  {options[2]}
+ - D)  {options[3]}"""
 
     def __init__(self, subject, topic, question_data):
         self.subject = subject
@@ -68,8 +70,11 @@ Chapter = %s
         self.question_data[1] = new_solutions
 
     def generate_comment_body(self):
-        return self.COMMENT_TEMPLATE % (
-            self.question_string, self.alphabetic_solutions, self.topic, *self.options
+        return self.COMMENT_TEMPLATE.format(
+            question=self.question_string,
+            solution=self.alphabetic_solutions,
+            chapter_name=self.topic,
+            options=self.options
         )
 
 
