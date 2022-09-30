@@ -48,7 +48,7 @@ Chapter = `{chapter_name}`
         for solution in self.solutions:
             solution_letter = chr(97 + solution).upper()
             solution_string += solution_letter + ", "
-        return solution_string.removesuffix(", ")
+        return solution_string[:-2]
 
     @property
     def options(self):
