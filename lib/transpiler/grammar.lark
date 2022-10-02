@@ -1,0 +1,50 @@
+// This is the grammar file for the Reddit Comment Question Format (RCQF). I have tried to keep it as humanly as possible,
+// trying to keep the format similar to a format one would normally write a question in. It gives quite some options
+// suited for each person's preferences. Like you can do assignments with an = symbol or the : symbol whichever is more
+// comforatble to you, or if you don't have a background in programming, you can use plain english with "is" and "are"
+// acting as the assignment operators.
+// One strange thing I have chosen about this format is that strings don't start with quotes rather they use @, I felt
+// quotes are used for too often in questions but the @ symbol is quite useless and therefore I chose to use this. Feel
+// free to create a PR if you have a better solution in mind (But if you're going to suggest triple quotes, I think 2
+// keystrokes are better 6)
+
+start                   : assignments*
+
+
+assignments             : subject_assignment
+                        | topic_assignment
+                        | question_assignment
+                        | options_assignment
+                        | solutions_assignment
+
+
+subject_assignment      : SUBJECT_START ASSIGNMENT_OPERATOR SUBJECT
+                        | SUBJECT_START ASSIGNMENT_OPERATOR STRING
+topic_assignment        : TOPIC_START ASSIGNMENT_OPERATOR STRING
+question_assignment     : QUESTION_START STRING
+options_assignment      : OPTIONS_START ASSIGNMENT_OPERATOR options_list
+solutions_assignment    : SOLUTIONS_START ASSIGNMENT_OPERATOR solutions_list
+
+
+options_list            : OPTION_INDEX STRING (SEPERATOR OPTION_INDEX STRING)*
+solutions_list          : LETTER (SEPERATOR LETTER)*
+
+
+SUBJECT_START           : "subject"i | "sub"i
+TOPIC_START             : "topic"i
+QUESTION_START          : "Q)"i | "Q."i
+OPTIONS_START           : "options"i
+SOLUTIONS_START         : "solution"i | "solutions"i | "soln"i | "solns"i
+
+SUBJECT                 : "physics"i | "chemistry"i | "mathematics"i
+                        | "phy"i | "phys"i | "chem"i | "maths"i | "math"i
+
+ASSIGNMENT_OPERATOR     : "=" | ":" | "is"i | "are"i
+SEPERATOR               : "," | /\n/
+OPTION_INDEX            : /[a-z][.)]/i
+LETTER                  : /[a-z A-Z]/
+STRING                  : /@[^@]*@/
+
+
+%import common.WS
+%ignore WS
