@@ -41,7 +41,6 @@ function setTopics() {
         option_tag.innerText = topic
         topic_select_tag.appendChild(option_tag)
     }
-    generateOptionElement()
 }
 
 
