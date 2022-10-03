@@ -9,9 +9,12 @@ app = Flask(__name__)
 def form_submit():
     form_data = dict(request.form)
     is_valid_form, err_msg = validate_form(form_data)
+    base_url = form_data.get("url").split("index.html")[0].removesuffix("/")
 
     if is_valid_form:
-        pass  # TODO: implement valid form handling
+        # TODO: implement valid form handling
+        redirect_url = base_url + "/submitted.html"
+        return redirect(redirect_url)
     else:
         base_url = form_data.get("url").split("index.html")[0].removesuffix("/")
         redirect_url = base_url + "/invalid-form.html?err=" + quote(err_msg)
