@@ -36,8 +36,8 @@ def validate_keys(keys):
 
 
 def validate_option_key(key):
-    # valid example: option[1][text] or option[1][correct]
-    return bool(re.fullmatch(r"option\[[1-9]\d*]\[(correct|text)]", key))
+    # valid example: option-1-text or option-20-correct
+    return bool(re.fullmatch(r"option-[1-9]\d*-(correct|text)", key))
 
 
 def validate_values(form_data):

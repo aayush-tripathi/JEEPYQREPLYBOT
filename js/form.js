@@ -58,7 +58,7 @@ function generateOptionElement() {
     // Create checkbox input
     let checkbox_input = document.createElement("input")
     checkbox_input.setAttribute("type", "checkbox")
-    checkbox_input.setAttribute("name", `option[${option_number}][correct]`)
+    checkbox_input.setAttribute("name", `option-${option_number}-correct`)
     checkbox_input.setAttribute("id", `option-${option_number}-correct`)
     container.appendChild(checkbox_input)
 
@@ -74,7 +74,7 @@ function generateOptionElement() {
 
     // Create checkbox input
     let text_input = document.createElement("textarea")
-    text_input.setAttribute("name", `option[${option_number}][text]`)
+    text_input.setAttribute("name", `option-${option_number}-text`)
     text_input.setAttribute("id", `option-${option_number}-text`)
     text_input.setAttribute("placeholder", "Try to keep the text on a single line")
     container.appendChild(text_input)

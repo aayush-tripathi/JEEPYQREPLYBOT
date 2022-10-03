@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect
 from form_validator import validate_form
+from form_parser import parse_form
 from urllib.parse import quote
 
 app = Flask(__name__)
@@ -12,7 +13,8 @@ def form_submit():
     base_url = form_data.get("url").split("index.html")[0].removesuffix("/")
 
     if is_valid_form:
-        # TODO: implement valid form handling
+        # TODO: implement github integration
+        print(parse_form(form_data))
         redirect_url = base_url + "/submitted.html"
         return redirect(redirect_url)
     else:
