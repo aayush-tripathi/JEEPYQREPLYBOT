@@ -28,6 +28,8 @@ def validate_keys(keys):
 
     if option_count < 2:
         return False, "Form should have at least 2 options."
+    elif correct_option_count == 0:
+        return False, "At least one option should be correct."
     elif correct_option_count >= option_count:
         return False, "All options can't be correct."
     return True, ""
@@ -39,6 +41,10 @@ def validate_option_key(key):
 
 
 def validate_values(form_data):
+    has_empty_values, err_msg = check_empty_values(form_data)
+    if has_empty_values:
+        return False, err_msg
+
     is_valid_subject = form_data["subject"] in DB.keys()
     if not is_valid_subject:
         return False, "No such subject exists in the database."
@@ -55,6 +61,13 @@ def validate_values(form_data):
     if is_duplicate_question:
         return False, "A question like this already exists."
     return True, ""
+
+
+def check_empty_values(form_data):
+    for key in form_data.keys():
+        if form_data[key] == "":
+            return True, f"The data field '{key}' is empty."
+    return False, ""
 
 
 def check_duplicate_question(question_list, question):
