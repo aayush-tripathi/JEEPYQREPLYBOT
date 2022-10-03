@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JEEPYQREPLYBOT - Web UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="form.js"></script>
+</head>
+<body>
+
+<form action="" method="post">
+
+    <div>
+        <h1>Subject</h1>
+        <hr>
+        <label for="subject-selection">Choose Subject:</label><br>
+        <select name="subject" id="subject-selection" required>
+            <option value="" selected hidden>Select Subject</option>
+        </select>
+    </div>
+
+
+    <div>
+        <h1>Topic</h1>
+        <hr>
+        <label for="topic-selection">Choose Topic:</label><br>
+        <select name="topic" id="topic-selection" required>
+            <option value="" selected hidden>Select Topic</option>
+        </select>
+    </div>
+
+
+    <div>
+        <h1>Question</h1>
+        <hr>
+        <label for="question-textarea">Enter the question here:<br>
+            <textarea name="question" id="question-textarea"
+                      placeholder="Enter only the question, don't add prefixes like 'Q)'" required></textarea>
+        </label>
+    </div>
+
+
+    <div>
+        <h1>Options</h1>
+        <hr>
+        <label>Enter the options here (tick the correct options):</label>
+        <div id="option-group"></div>
+        <button type="button" id="add-option-btn" onclick="generateOptionElement()">Add Option</button>
+    </div>
+
+
+    <div>
+        <h1>Submit</h1>
+        <hr>
+        <label>
+            Please review your question before submitting, make sure there exist no errors to ensure your question gets
+            approved and then merged in the database. The maintainers will review this manually and once approved, only
+            then will your question be merged so if you're sending a bogus submission, please reconsider.<br><br>
+        </label>
+        <button type="submit" id="submit-btn">Submit</button>
+    </div>
+
+    <br>
+</form>
+
+</body>
+</html>
