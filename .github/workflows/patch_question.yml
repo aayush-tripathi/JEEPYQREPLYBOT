@@ -25,5 +25,5 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Automated merge for question at issue ${{ !github.event.issue_id }}
+          commit_message: Automated merge for question at issue ${{ !github.event.client_payload.issue_id }}
           branch: master
