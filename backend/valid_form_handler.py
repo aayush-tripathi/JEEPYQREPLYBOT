@@ -16,4 +16,5 @@ def handle_valid_form(form_data):
     owner, repository = os.environ.get("MAIN_REPOSITORY").split("/")
     issue_title = "[New Question]: " + form_data["question"][:30] + "..."
     issue_body = parse_form_to_github_issue(form_data)
-    app.create_issue(owner, repository, issue_title, issue_body)
+    response = app.create_issue(owner, repository, issue_title, issue_body)
+    return response["number"]

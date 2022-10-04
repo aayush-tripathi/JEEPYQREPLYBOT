@@ -64,6 +64,12 @@
         button:active {
             background: rgb(55 48 163) !important;
         }
+
+        a {
+            text-decoration: underline !important;
+            color: blue !important;
+        }
+
     </style>
 </head>
 <body>
@@ -72,9 +78,26 @@
     <hr>
     <p>
         Your form has been submitted, it will now be carefully reviewed by the maintainers of the JEEPYQREPLYBOT. Once
-        Reviewed, it will be merged into our database. Thank you for your contribution!
+        Reviewed, it will be merged into our database. Thank you for your contribution!<br><br>
+        <b>You can check the status of this submission <a id="issue-id" href="" target="_blank">here</a>.</b>
     </p><br>
     <button onclick="history.back()">Go Back</button>
 </div>
+
+<script>
+    // https://stackoverflow.com/questions/979975/get-the-values-from-the-get-parameters-javascript
+    function getParam(name) {
+        let r = /[?&]([^=#]+)=([^&#]*)/g, p = {}, match;
+        while (match = r.exec(window.location)) p[match[1]] = match[2];
+        return p[name];
+    }
+
+    let issue_id = getParam("id")
+    if (issue_id !== undefined) {
+        issue_url = "https://github.com/TriAay249/JEEPYQREPLYBOT/issues/" + decodeURI(issue_id)
+        document.querySelector("#issue-id").setAttribute("href", issue_url)
+    }
+
+</script>
 </body>
 </html>
