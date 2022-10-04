@@ -1,9 +1,9 @@
 import argparse
-import subprocess
 import json
+import sys
 
 # Find project root
-project_root = subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode().strip()
+project_root = __file__.removesuffix("/lib/cli.py")
 data_file_path = project_root + "/src/data.json"
 
 # Parsers
@@ -15,7 +15,10 @@ subparsers = parser.add_subparsers(title="Commands", dest="command", required=Tr
 # Add Command
 add_command = subparsers.add_parser("add", help="Append a question to the database.")
 add_command.add_argument(
-    "-d", "--dry-run", help="If passed", action="store_true"
+    "-d", "--dry-run", help="Will not make changes to database", action="store_true"
+)
+add_command.add_argument(
+    "-p", "--patch", help="Pass the path to a JSON file to be merged into the database, not intended for use by humans",
 )
 
 
@@ -119,10 +122,35 @@ def add_question(dry_run=True):
             json.dump(data, file)
 
 
+def add_patch(patch_file_path):
+    try:
+        with open(patch_file_path) as patch_file:
+            json_data = json.load(patch_file)
+    except json.JSONDecodeError:
+        print("invalid json passed")
+        sys.exit(1)
+
+    with open(data_file_path) as db:
+        data = json.load(db)
+
+    subject = list(json_data.keys())[0]
+    topic = list(json_data[subject].keys())[0]
+    question_data = json_data[subject][topic]
+    data[subject] = data.get(subject, {topic: []})
+    data[subject][topic] = data[subject].get(topic, [])
+    data[subject][topic].append(question_data)
+
+    with open(data_file_path, "w") as db:
+        json.dump(data, db)
+
+
 if __name__ == "__main__":
     args = parser.parse_args()
     try:
         if args.command == "add":
-            add_question(args.dry_run)
+            if args.patch is None:
+                add_question(args.dry_run)
+            else:
+                add_patch(args.patch)
     except KeyboardInterrupt:
         print("\n\nexiting...")
