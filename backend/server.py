@@ -1,7 +1,8 @@
+from urllib.parse import quote
+
 from flask import Flask, request, redirect
 from form_validator import validate_form
-from form_parser import parse_form
-from urllib.parse import quote
+from valid_form_handler import handle_valid_form
 
 app = Flask(__name__)
 
@@ -13,9 +14,8 @@ def form_submit():
     base_url = form_data.get("url").split("index.html")[0].removesuffix("/")
 
     if is_valid_form:
-        # TODO: implement github integration
-        print(parse_form(form_data))
-        redirect_url = base_url + "/submitted.html"
+        issue_id = handle_valid_form(form_data)
+        redirect_url = base_url + f"/submitted.html?id={issue_id}"
         return redirect(redirect_url)
     else:
         base_url = form_data.get("url").split("index.html")[0].removesuffix("/")
