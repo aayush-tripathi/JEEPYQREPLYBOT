@@ -1,0 +1,29 @@
+name: Patch question to database
+
+on:
+  repository_dispatch:
+
+jobs:
+  patch_db:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+        run: pip install requests
+
+      - name: Create patch file
+        run: python3 lib/cli.py parse --issue ${{ !github.event.issue_id }}
+
+      - name: Apply patch
+        run: python3 lib/cli.py add --patch tmp/patch.json
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Automated merge for question at issue ${{ !github.event.client_payload.issue_id }}
+          branch: master
