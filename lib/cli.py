@@ -79,15 +79,17 @@ def input_solutions(options):
 def add_question(dry_run=True):
     # Input Subject
     while True:
-        subject = input("Enter the subject [P/C/M]: ").lower()
-        if subject not in ("p", "c", "m"):
+        subject = input("Enter the subject [P/I/C/O/M]: ").lower()
+        if subject not in ("p", "i", "c", "o", "m"):
             print("Please enter a valid subject.")
             continue
         break
 
     subject = {
         "p": "Physics",
-        "c": "Chemistry",
+        "i": "Inorganic Chemistry",
+        "c": "Physical Chemistry",
+        "o": "Organic Chemistry",
         "m": "Mathematics"
     }[subject]
 
