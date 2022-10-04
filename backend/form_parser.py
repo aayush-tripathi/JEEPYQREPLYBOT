@@ -1,3 +1,5 @@
+import json
+
 QUESTION_TEMPLATE = """
 __Subject:__ {subject}
 __Topic:__ {topic}
@@ -64,4 +66,4 @@ def parse_form_to_github_issue(form_data):
     )
     parsed_json = parse_form_to_db_format(form_data)
 
-    return ISSUE_TEMPLATE.format(question_body=question_body, parsed_json=parsed_json)
+    return ISSUE_TEMPLATE.format(question_body=question_body, parsed_json=json.dumps(parsed_json, indent=2))
