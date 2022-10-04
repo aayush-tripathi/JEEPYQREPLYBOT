@@ -136,3 +136,11 @@ class GithubApp:
             if not response.ok:
                 raise HTTPError(response.status_code)
             return response.json()
+
+    @automatic_token_renew
+    def create_repository_dispatch(self, owner, repository, issue_id) -> None:
+        endpoint = self.endpoint(f"repos/{owner}/{repository}/dispatches")
+        data = json.dumps({"event_type": "merge-question", "client_payload": {"issue_id": issue_id}})
+        with requests.post(endpoint, headers=self.token_header, data=data) as response:
+            if not response.ok:
+                raise HTTPError(response.status_code)
