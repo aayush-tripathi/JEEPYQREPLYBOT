@@ -1,0 +1,11 @@
+[Unit]
+Description=Backend server for JEEPYQREPLYBOT
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/ubuntu/pyq-server/backend/server.py
+
+[Install]
+WantedBy=multi-user.target
