@@ -1,10 +1,15 @@
 import argparse
 import json
+import os
 import sys
+import requests
 
 # Find project root
 project_root = __file__.removesuffix("/lib/cli.py")
 data_file_path = project_root + "/src/data.json"
+tmp_dir_path = project_root + "/tmp"
+if not os.path.exists(tmp_dir_path):
+    os.mkdir(tmp_dir_path)
 
 # Parsers
 parser = argparse.ArgumentParser(
@@ -19,6 +24,12 @@ add_command.add_argument(
 )
 add_command.add_argument(
     "-p", "--patch", help="Pass the path to a JSON file to be merged into the database, not intended for use by humans",
+)
+
+# Parse JSON from issue
+parse_command = subparsers.add_parser("parse", help="Parses different formats and creates a patch file in tmp/")
+parse_command.add_argument(
+    "-i", "--issue", help="Pass the issue number of the issue to be parsed"
 )
 
 
@@ -144,6 +155,25 @@ def add_patch(patch_file_path):
         json.dump(data, db)
 
 
+def parse_issue_body(body):
+    return body.split("```json")[-1].strip().removesuffix("```")
+
+
+def parse_issue(issue_number):
+    with requests.get("https://api.github.com/repos/TriAay249/JEEPYQREPLYBOT/issues") as response:
+        if not response.ok:
+            raise Exception("Error fetching issue from GitHub api")
+        issues = list(response.json())
+    body = ""
+    for issue in issues:
+        if str(issue["number"]) == str(issue_number):
+            body = issue["body"]
+            break
+    body = parse_issue_body(body)
+    with open(tmp_dir_path + "/patch.json", "w") as file:
+        json.dump(json.loads(body), file)
+
+
 if __name__ == "__main__":
     args = parser.parse_args()
     try:
@@ -152,5 +182,8 @@ if __name__ == "__main__":
                 add_question(args.dry_run)
             else:
                 add_patch(args.patch)
+        if args.command == "parse":
+            if args.issue is not None:
+                parse_issue(args.issue)
     except KeyboardInterrupt:
         print("\n\nexiting...")
