@@ -6,9 +6,9 @@ __Topic:__ {topic}
 Q) {question} 
 
 Options:
-{'\n'.join([chr(i + 97).upper() + ') ' + option for i, option in enumerate(options)])}
+{option_string}
 
-Solutions are: {', '.join([chr(sol + 97).upper() for sol in solutions])}
+Solutions are: {solution_string}
 """
 
 ISSUE_TEMPLATE = """
@@ -57,8 +57,10 @@ def parse_form_to_github_issue(form_data):
     question = form_data["question"]
     solutions, options = parse_options_for_json(form_data)
 
+    option_string = "\n".join([chr(i + 97).upper() + ') ' + option for i, option in enumerate(options)])
+    solution_string = ', '.join([chr(sol + 97).upper() for sol in solutions])
     question_body = QUESTION_TEMPLATE.format(
-        subject=subject, topic=topic, question=question, options=options, solutions=solutions
+        subject=subject, topic=topic, question=question, option_string=option_string, solution_string=solution_string
     )
     parsed_json = parse_form_to_db_format(form_data)
 

@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from github_api import GithubApp
 from form_parser import parse_form_to_github_issue
 
-load_dotenv(".env")
+load_dotenv(__file__.removesuffix("valid_form_handler.py") + ".env")
 
 KEY = os.environ.get("KEY_FILE_PATH")
 APP_ID = os.environ.get("APP_ID")
