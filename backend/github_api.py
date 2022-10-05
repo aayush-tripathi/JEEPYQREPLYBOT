@@ -5,6 +5,20 @@ import jwt
 import requests
 
 
+# Helpers
+def make_post_request(url, headers=None, data=None):
+    kwargs = {"url": url, "headers": headers, "data": data}
+    kwargs = {key: val for key, val in kwargs.items() if val is not None}
+    print(kwargs)
+    with requests.post(**kwargs) as response:
+        import curlify
+        print(response.status_code, response.content)
+        print(curlify.to_curl(response.request))
+        if not response.ok:
+            raise HTTPError(response.status_code)
+        return response
+
+
 # Errors
 class HTTPError(Exception):
     def __init__(self, status_code):
@@ -138,9 +152,16 @@ class GithubApp:
             return response.json()
 
     @automatic_token_renew
-    def create_repository_dispatch(self, owner, repository, issue_id) -> None:
+    def create_repository_dispatch(self, owner, repository, event_type, client_payload) -> None:
         endpoint = self.endpoint(f"repos/{owner}/{repository}/dispatches")
-        data = json.dumps({"event_type": "merge-question", "client_payload": {"issue_id": issue_id}})
+        data = json.dumps({"event_type": event_type, "client_payload": client_payload})
+        make_post_request(endpoint, self.token_header, data)
+
+    @automatic_token_renew
+    def close_issue(self, owner, repository, issue_number):
+        endpoint = self.endpoint(f"repos/{owner}/{repository}/issues/{issue_number}")
+        data = json.dumps({"state": "closed"})
         with requests.post(endpoint, headers=self.token_header, data=data) as response:
             if not response.ok:
                 raise HTTPError(response.status_code)
+            return response.json()
