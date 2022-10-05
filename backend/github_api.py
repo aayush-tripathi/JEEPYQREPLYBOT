@@ -11,9 +11,6 @@ def make_post_request(url, headers=None, data=None):
     kwargs = {key: val for key, val in kwargs.items() if val is not None}
     print(kwargs)
     with requests.post(**kwargs) as response:
-        import curlify
-        print(response.status_code, response.content)
-        print(curlify.to_curl(response.request))
         if not response.ok:
             raise HTTPError(response.status_code)
         return response
