@@ -10,15 +10,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Install python
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
+
+      - name: Install dependencies
         run: pip install requests
 
       - name: Create patch file
-        run: python3 lib/cli.py parse --issue ${{ !github.event.issue_id }}
+        run: python3 lib/cli.py parse --issue ${{ !github.event.client_payload.issue_id }}
 
       - name: Apply patch
         run: python3 lib/cli.py add --patch tmp/patch.json
